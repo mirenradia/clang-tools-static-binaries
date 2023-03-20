@@ -44,7 +44,7 @@ jobs:
           - clang-version: 16
             release: llvm-project-16.0.0.src
           - os: linux
-            runner: ubuntu-20.04
+            runner: ubuntu-22.04
             os-cmake-args: '-DLLVM_BUILD_STATIC=ON -DCMAKE_CXX_FLAGS="-s -flto" ${POSIX_CMAKE_ARGS}'
             build-args: '-j$(nproc)'
             bindir: '/build/bin'
@@ -69,7 +69,7 @@ jobs:
     runs-on: ${{ matrix.runner }}
     env:
       COMMON_CMAKE_ARGS: '-DBUILD_SHARED_LIBS=OFF -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra"'
-      POSIX_CMAKE_ARGS: '-DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_CXX_COMPILER=g++-10 -DCMAKE_C_COMPILER=gcc-10'
+      POSIX_CMAKE_ARGS: '-DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_CXX_COMPILER=g++-12 -DCMAKE_C_COMPILER=gcc-12'
       RELEASE: '${{ matrix.release }}'
       suffix: '${{ matrix.clang-version }}_${{ matrix.os }}-amd64'
     steps:
